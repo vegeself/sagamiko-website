@@ -49,11 +49,12 @@
     .hero{
       border-radius:24px;
       overflow:hidden;
-      background: linear-gradient(120deg, rgba(11,18,32,.75), rgba(11,18,32,.35)),
-                  url("images/hero-sagamiko.jpg") center/cover no-repeat;
-      color:#fff;
-      min-height:320px;
-      display:flex;align-items:flex-end;
+      background:
+      linear-gradient(120deg, rgba(11,18,32,.75), rgba(11,18,32,.35)),
+      var(--hero-bg, url("images/hero-sagamiko.jpg"));
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .hero-inner{padding:22px}
     .hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.02em}
@@ -172,5 +173,36 @@
   <a href="bukken.html">物件</a>
 </nav>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+
+  // imagesフォルダ内のファイル名を、表示したい順に並べる
+  const images = [
+    "sagamiko2003bs.jpg",
+    "hanabi2308.jpg",
+    "sagamiko2003ds.jpg",
+    "sagamiko2012s.jpg",
+    "fujitakaoa1.jpg",
+  ];
+
+  let i = 0;
+
+  function setHero(idx) {
+    hero.style.setProperty("--hero-bg", `url("images/${images[idx]}")`);
+  }
+
+  setHero(i);
+
+  // 5秒ごとに切り替え（好みで変更）
+  setInterval(() => {
+    i = (i + 1) % images.length;
+    setHero(i);
+  }, 5000);
+});
+</script>
+
 </body>
 </html>
+
